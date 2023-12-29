@@ -20,6 +20,14 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+.noWorkoutMessage {
+  width: 100%;
+  height: 666px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 /* a {
   font-weight: 500;
   color: #646cff;
