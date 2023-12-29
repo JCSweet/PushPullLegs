@@ -11,6 +11,7 @@ import LooksOneIcon from "@mui/icons-material/LooksOne";
 import LooksTwoIcon from "@mui/icons-material/LooksTwo";
 import Looks3Icon from "@mui/icons-material/Looks3";
 import Checkbox from "@mui/material/Checkbox";
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 
 export default function PPLWorkoutItem({ exercise, updateSet }) {
   const labelId = `checkbox-list-label-${exercise.id}`;
@@ -26,7 +27,7 @@ export default function PPLWorkoutItem({ exercise, updateSet }) {
     <>
       <ListItemButton onClick={toggleOpen}>
         <ListItemIcon>
-          <AccessibilityNewIcon />
+        {exercise.equipment === "bodyweight" ? <AccessibilityNewIcon /> : <FitnessCenterIcon />}
         </ListItemIcon>
         <ListItemText primary={exercise.name} />
         {open ? <ExpandLess /> : <ExpandMore />}
@@ -90,39 +91,3 @@ export default function PPLWorkoutItem({ exercise, updateSet }) {
     </>
   );
 }
-
-// const starterExercises = [
-//     {
-//       id: 1,
-//       name: "Squat",
-//       equipment: "bodyweight",
-//       category: "Legs",
-//       reps: 12,
-//       sets: 3,
-//       set1: true,
-//       set2: false,
-//       set3: false,
-//     },
-//     {
-//       id: 2,
-//       name: "Push Up",
-//       equipment: "bodyweight",
-//       category: "Push",
-//       reps: 12,
-//       sets: 3,
-//       set1: true,
-//       set2: false,
-//       set3: false,
-//     },
-//     {
-//       id: 3,
-//       name: "Row",
-//       equipment: "bodyweight",
-//       category: "Pull",
-//       reps: 12,
-//       sets: 3,
-//       set1: false,
-//       set2: false,
-//       set3: false,
-//     },
-//   ];

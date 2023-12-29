@@ -9,8 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-export default function PPLAppBar() {
-
+export default function PPLAppBar({ gernerateWorkout }) {
   // Open / Close Menus in AppBar
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -59,7 +58,13 @@ export default function PPLAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Push Pull Legs
           </Typography>
-          <Button sx={{ ml: 2 }} color="inherit">Quick PPL</Button>
+          <Button
+            sx={{ ml: 2 }}
+            color="inherit"
+            onClick={() => gernerateWorkout()}
+          >
+            Quick PPL
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>
