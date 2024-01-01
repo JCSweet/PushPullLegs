@@ -1,0 +1,17 @@
+???? Toggle weighted vs bodyweight-only || Separate exercise for weight vs bw
+
+Prevent repeating an exercise until you've gone through all in that category
+
+Progressive overload reps
+
+Progressive overload weight
+
+Custom exercises
+
+Enable / Disable exercises
+
+Local storage
+
+Database storage
+
+Set goal reps

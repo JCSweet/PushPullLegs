@@ -27,9 +27,9 @@ export default function PPLWorkoutItem({ exercise, updateSet }) {
     <>
       <ListItemButton onClick={toggleOpen}>
         <ListItemIcon>
-        {exercise.equipment === "bodyweight" ? <AccessibilityNewIcon /> : <FitnessCenterIcon />}
+        {exercise.bodyweight ? <AccessibilityNewIcon /> : <FitnessCenterIcon />}
         </ListItemIcon>
-        <ListItemText primary={exercise.name} />
+        <ListItemText primary={exercise.displayName} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
 
@@ -44,7 +44,7 @@ export default function PPLWorkoutItem({ exercise, updateSet }) {
             <ListItemIcon>
               <Checkbox
                 edge="start"
-                checked={exercise.set1}
+                checked={exercise.set1Complete}
                 tabIndex={-1}
                 disableRipple
                 inputProps={{ "aria-labelledby": labelId }}
@@ -61,7 +61,7 @@ export default function PPLWorkoutItem({ exercise, updateSet }) {
             <ListItemIcon>
               <Checkbox
                 edge="start"
-                checked={exercise.set2}
+                checked={exercise.set2Complete}
                 tabIndex={-1}
                 disableRipple
                 inputProps={{ "aria-labelledby": labelId }}
@@ -78,7 +78,7 @@ export default function PPLWorkoutItem({ exercise, updateSet }) {
             <ListItemIcon>
               <Checkbox
                 edge="start"
-                checked={exercise.set3}
+                checked={exercise.set3Complete}
                 tabIndex={-1}
                 disableRipple
                 inputProps={{ "aria-labelledby": labelId }}
