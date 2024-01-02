@@ -20,6 +20,7 @@ export default function PushPullLegs() {
       set1Complete: false,
       set2Complete: false,
       set3Complete: false,
+      exerciseCompleted: false,
     },
     {
       id: crypto.randomUUID(),
@@ -34,6 +35,7 @@ export default function PushPullLegs() {
       set1Complete: false,
       set2Complete: false,
       set3Complete: false,
+      exerciseCompleted: false,
     },
     {
       id: crypto.randomUUID(),
@@ -48,6 +50,7 @@ export default function PushPullLegs() {
       set1Complete: false,
       set2Complete: false,
       set3Complete: false,
+      exerciseCompleted: false,
     },
     {
       id: crypto.randomUUID(),
@@ -62,6 +65,7 @@ export default function PushPullLegs() {
       set1Complete: false,
       set2Complete: false,
       set3Complete: false,
+      exerciseCompleted: false,
     },
     {
       id: crypto.randomUUID(),
@@ -76,6 +80,7 @@ export default function PushPullLegs() {
       set1Complete: false,
       set2Complete: false,
       set3Complete: false,
+      exerciseCompleted: false,
     },
     {
       id: crypto.randomUUID(),
@@ -90,6 +95,7 @@ export default function PushPullLegs() {
       set1Complete: false,
       set2Complete: false,
       set3Complete: false,
+      exerciseCompleted: false,
     },
     {
       id: crypto.randomUUID(),
@@ -104,6 +110,7 @@ export default function PushPullLegs() {
       set1Complete: false,
       set2Complete: false,
       set3Complete: false,
+      exerciseCompleted: false,
     },
     {
       id: crypto.randomUUID(),
@@ -118,6 +125,7 @@ export default function PushPullLegs() {
       set1Complete: false,
       set2Complete: false,
       set3Complete: false,
+      exerciseCompleted: false,
     },
     {
       id: crypto.randomUUID(),
@@ -132,6 +140,7 @@ export default function PushPullLegs() {
       set1Complete: false,
       set2Complete: false,
       set3Complete: false,
+      exerciseCompleted: false,
     },
     {
       id: crypto.randomUUID(),
@@ -146,6 +155,7 @@ export default function PushPullLegs() {
       set1Complete: false,
       set2Complete: false,
       set3Complete: false,
+      exerciseCompleted: false,
     },
     {
       id: crypto.randomUUID(),
@@ -160,6 +170,7 @@ export default function PushPullLegs() {
       set1Complete: false,
       set2Complete: false,
       set3Complete: false,
+      exerciseCompleted: false,
     },
     {
       id: crypto.randomUUID(),
@@ -174,6 +185,7 @@ export default function PushPullLegs() {
       set1Complete: false,
       set2Complete: false,
       set3Complete: false,
+      exerciseCompleted: false,
     },
     {
       id: crypto.randomUUID(),
@@ -188,6 +200,7 @@ export default function PushPullLegs() {
       set1Complete: false,
       set2Complete: false,
       set3Complete: false,
+      exerciseCompleted: false,
     },
     {
       id: crypto.randomUUID(),
@@ -202,10 +215,11 @@ export default function PushPullLegs() {
       set1Complete: false,
       set2Complete: false,
       set3Complete: false,
+      exerciseCompleted: false,
     },
   ];
 
-  //   Update Set completion
+  //   Update individual set completion
   const toggleSetCompletion = (id, setNumb) => {
     setExercises((prevProgress) => {
       return prevProgress.map((exercise) => {
@@ -215,6 +229,40 @@ export default function PushPullLegs() {
           return { ...exercise, set2Complete: !exercise.set2Complete };
         } else if (exercise.id === id && setNumb === "set3") {
           return { ...exercise, set3Complete: !exercise.set3Complete };
+        } else {
+          return exercise;
+        }
+      });
+    });
+  };
+
+  //   Update rep goal
+  const increaseReps = (id) => {
+    setExercises((prevExercise) => {
+      return prevExercise.map((exercise) => {
+        if (exercise.id === id && exercise.bodyweight) {
+          return {
+            ...exercise,
+            goalRepsBodyweight: exercise.goalRepsBodyweight + 1,
+          };
+        } else if (exercise.id === id && !exercise.bodyweight) {
+          return { ...exercise, goalRepsWeight: exercise.goalRepsWeight + 1 };
+        } else {
+          return exercise;
+        }
+      });
+    });
+  };
+  const decreaseReps = (id) => {
+    setExercises((prevExercise) => {
+      return prevExercise.map((exercise) => {
+        if (exercise.id === id && exercise.bodyweight) {
+          return {
+            ...exercise,
+            goalRepsBodyweight: exercise.goalRepsBodyweight - 1,
+          };
+        } else if (exercise.id === id && !exercise.bodyweight) {
+          return { ...exercise, goalRepsWeight: exercise.goalRepsWeight - 1 };
         } else {
           return exercise;
         }
@@ -250,7 +298,11 @@ export default function PushPullLegs() {
   const toggleWeightMode = (id) => {
     setExercises((prevProgress) => {
       return prevProgress.map((exercise) => {
-        if (exercise.id === id && (exercise.isPossibleBodyweight && exercise.isPossibleWeight)) {
+        if (
+          exercise.id === id &&
+          exercise.isPossibleBodyweight &&
+          exercise.isPossibleWeight
+        ) {
           return { ...exercise, bodyweight: !exercise.bodyweight };
         } else {
           return exercise;
@@ -262,7 +314,13 @@ export default function PushPullLegs() {
   return (
     <div>
       <PPLAppBar gernerateWorkout={newWorkout} />
-      <PPLWorkout exercises={exercises} updateSet={toggleSetCompletion} toggleWeightMode={toggleWeightMode} />
+      <PPLWorkout
+        exercises={exercises}
+        updateSet={toggleSetCompletion}
+        toggleWeightMode={toggleWeightMode}
+        increaseReps={increaseReps}
+        decreaseReps={decreaseReps}
+      />
     </div>
   );
 }

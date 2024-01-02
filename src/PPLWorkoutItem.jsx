@@ -1,6 +1,6 @@
-// import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+// import ListItemButton from '@mui/material/ListItemButton';
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 import Collapse from "@mui/material/Collapse";
 import List from "@mui/material/List";
@@ -11,12 +11,16 @@ import LooksTwoIcon from "@mui/icons-material/LooksTwo";
 import Looks3Icon from "@mui/icons-material/Looks3";
 import Checkbox from "@mui/material/Checkbox";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
-import SettingsIcon from '@mui/icons-material/Settings';
+import SettingsIcon from "@mui/icons-material/Settings";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from '@mui/icons-material/Remove';
 
 export default function PPLWorkoutItem({
   exercise,
   updateSet,
   toggleWeightMode,
+  increaseReps,
+  decreaseReps,
 }) {
   const labelId = `checkbox-list-label-${exercise.id}`;
 
@@ -26,95 +30,104 @@ export default function PPLWorkoutItem({
   const toggleOpenOptions = () => {
     setOpenOptions(!openOptions);
   };
-    //   Toggle open / close set list
-    const [exerciseComplete, setexerciseComplete] = React.useState(true);
-
-    const updateExerciseComplete = (id) => {
-      if ((exercise.id === id && exercise.set1Complete && exercise.set2Complete && exercise.set3Complete)){
-        setExerciseComplete(!exerciseComplete);
-      } 
-    };
 
   return (
     <>
-        {/* Exercise Header  */}
+      {/* Exercise Header  */}
       <ListItem>
         <ListItemIcon onClick={() => toggleWeightMode(exercise.id)}>
-          {exercise.bodyweight ? ( <AccessibilityNewIcon />) : ( <FitnessCenterIcon /> )}
+          {exercise.bodyweight ? (
+            <AccessibilityNewIcon />
+          ) : (
+            <FitnessCenterIcon />
+          )}
         </ListItemIcon>
         <ListItemText primary={exercise.displayName} />
         <ListItemIcon>
-        <SettingsIcon onClick={toggleOpenOptions} />
+          <SettingsIcon onClick={toggleOpenOptions} />
         </ListItemIcon>
       </ListItem>
-        {/* Options Menu */}
+      {/* Options Menu */}
       <Collapse in={openOptions} timeout="auto" unmountOnExit>
-      <ListItem sx={{ pl: 10 }}>
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <ListItemText primary={ "Options TBD"} />
-          </ListItem>
+        <ListItem sx={{ pl: 10, pr: 10, textAlign: 'center', justifyContent: 'center', minWidth: 0, }}>
+          <ListItemIcon sx={{ justifyContent: 'center', minWidth: 0, pl: 1, pr: 1 }}>
+            <RemoveIcon onClick={() => decreaseReps(exercise.id)} />
+          </ListItemIcon>
+          <ListItemText sx={{ }} primary={"Set Reps"} />
+          <ListItemIcon sx={{ justifyContent: 'center', minWidth: 0, pl: 1, pr: 1 }}>
+            <AddIcon onClick={() => increaseReps(exercise.id)}/>
+          </ListItemIcon>
+        </ListItem>
       </Collapse>
-        {/* Exercise Set List */}
-      <Collapse in={exerciseComplete} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          {/* Sub-list Item 1 */}
-          <ListItem sx={{ pl: 10 }}>
-            <ListItemIcon>
-              <LooksOneIcon />
-            </ListItemIcon>
-            <ListItemText primary={ exercise.bodyweight ? ( `x${exercise.goalRepsBodyweight}`) : ( `x${exercise.goalRepsWeight}` )} />
-            <ListItemIcon>
-              <Checkbox
-                edge="start"
-                checked={exercise.set1Complete}
-                tabIndex={-1}
-                // disableRipple
-                inputProps={{ "aria-labelledby": labelId }}
-                onClick={() => updateSet(exercise.id, "set1")}
-                onChange={() => updateExerciseComplete(exercise.id)}
-              />
-            </ListItemIcon>
-          </ListItem>
-          {/* Sub-list Item 2 */}
-          <ListItem sx={{ pl: 10 }}>
-            <ListItemIcon>
-              <LooksTwoIcon />
-            </ListItemIcon>
-            <ListItemText primary={ exercise.bodyweight ? ( `x${exercise.goalRepsBodyweight}`) : ( `x${exercise.goalRepsWeight}` )} />
-            <ListItemIcon>
-              <Checkbox
-                edge="start"
-                checked={exercise.set2Complete}
-                tabIndex={-1}
-                // disableRipple
-                inputProps={{ "aria-labelledby": labelId }}
-                onClick={() => updateSet(exercise.id, "set2")}
-                onChange={() => updateExerciseComplete(exercise.id)}
-              />
-            </ListItemIcon>
-          </ListItem>
-          {/* Sub-list Item 3 */}
-          <ListItem sx={{ pl: 10 }}>
-            <ListItemIcon>
-              <Looks3Icon />
-            </ListItemIcon>
-            <ListItemText primary={ exercise.bodyweight ? ( `x${exercise.goalRepsBodyweight}`) : ( `x${exercise.goalRepsWeight}` )} />
-            <ListItemIcon>
-              <Checkbox
-                edge="start"
-                checked={exercise.set3Complete}
-                tabIndex={-1}
-                // disableRipple
-                inputProps={{ "aria-labelledby": labelId }}
-                onClick={() => updateSet(exercise.id, "set3")}
-                onChange={() => updateExerciseComplete(exercise.id)}
-              />
-            </ListItemIcon>
-          </ListItem>
-        </List>
-        </Collapse>
+      {/* Exercise Set List */}
+      <List component="div" disablePadding>
+        {/* Sub-list Item 1 */}
+        <ListItem sx={{ pl: 10 }}>
+          <ListItemIcon>
+            <LooksOneIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              exercise.bodyweight
+                ? `x${exercise.goalRepsBodyweight}`
+                : `x${exercise.goalRepsWeight}`
+            }
+          />
+          <ListItemIcon>
+            <Checkbox
+              edge="start"
+              checked={exercise.set1Complete}
+              tabIndex={-1}
+              inputProps={{ "aria-labelledby": labelId }}
+              onChange={() => updateSet(exercise.id, "set1")}
+            />
+          </ListItemIcon>
+        </ListItem>
+        {/* Sub-list Item 2 */}
+        <ListItem sx={{ pl: 10 }}>
+          <ListItemIcon>
+            <LooksTwoIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              exercise.bodyweight
+                ? `x${exercise.goalRepsBodyweight}`
+                : `x${exercise.goalRepsWeight}`
+            }
+          />
+          <ListItemIcon>
+            <Checkbox
+              edge="start"
+              checked={exercise.set2Complete}
+              tabIndex={-1}
+              inputProps={{ "aria-labelledby": labelId }}
+              onChange={() => updateSet(exercise.id, "set2")}
+            />
+          </ListItemIcon>
+        </ListItem>
+        {/* Sub-list Item 3 */}
+        <ListItem sx={{ pl: 10 }}>
+          <ListItemIcon>
+            <Looks3Icon />
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              exercise.bodyweight
+                ? `x${exercise.goalRepsBodyweight}`
+                : `x${exercise.goalRepsWeight}`
+            }
+          />
+          <ListItemIcon>
+            <Checkbox
+              edge="start"
+              checked={exercise.set3Complete}
+              tabIndex={-1}
+              inputProps={{ "aria-labelledby": labelId }}
+              onChange={() => updateSet(exercise.id, "set3")}
+            />
+          </ListItemIcon>
+        </ListItem>
+      </List>
     </>
   );
 }

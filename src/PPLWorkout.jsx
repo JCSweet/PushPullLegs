@@ -1,7 +1,7 @@
 import List from "@mui/material/List";
 import PPLWorkoutItem from "./PPLWorkoutItem";
 
-export default function PPLWorkout({exercises, updateSet, toggleWeightMode}) {
+export default function PPLWorkout({exercises, updateSet, toggleWeightMode, increaseReps, decreaseReps, }) {
   return (
     <>
       {/* <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}> */}
@@ -13,6 +13,8 @@ export default function PPLWorkout({exercises, updateSet, toggleWeightMode}) {
             key={exercise.id}
             updateSet={updateSet}
             toggleWeightMode = {toggleWeightMode}
+            increaseReps={increaseReps}
+            decreaseReps={decreaseReps}
           />
         ))}
       </List>
