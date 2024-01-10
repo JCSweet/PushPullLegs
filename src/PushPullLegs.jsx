@@ -270,18 +270,30 @@ export default function PushPullLegs() {
     });
   };
 
+  // Toggle Global Bodyweight Only Option
+  const [bodyweightOnly, setBodyweightOnly] = useState(false);
+  const toggleBodyweightOnly = () => {
+    setBodyweightOnly(!bodyweightOnly);
+  };
+
   // Generate new random workout
   const getRandExercise = (type) => {
     const choices = exerciseMasterList;
     let selection = {};
     while ((selection = {})) {
       let index = Math.floor(Math.random() * choices.length);
-      if (choices[index].category === type) {
+      if (bodyweightOnly) {
+        if (choices[index].category === type && choices[index].isPossibleBodyweight) {
+          selection = choices[index];
+          return selection;
+        }
+      } else if (choices[index].category === type) {
         selection = choices[index];
         return selection;
       }
     }
   };
+
   const newWorkout = () => {
     setExercises([]);
     setExercises((priorWorkout) => {
@@ -313,7 +325,11 @@ export default function PushPullLegs() {
 
   return (
     <div>
-      <PPLAppBar gernerateWorkout={newWorkout} />
+      <PPLAppBar
+        generateWorkout={newWorkout}
+        toggleBodyweightOnly={toggleBodyweightOnly}
+        bodyweightOnly={bodyweightOnly}
+      />
       <PPLWorkout
         exercises={exercises}
         updateSet={toggleSetCompletion}
