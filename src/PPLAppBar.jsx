@@ -51,7 +51,7 @@ export default function PPLAppBar({ gernerateWorkout }) {
               "aria-labelledby": "icon-button",
             }}
           >
-            <MenuItem onClick={handleClose}>TBD</MenuItem>
+            <MenuItem onClick={handleClose}>Test Menu</MenuItem>
             <MenuItem onClick={handleClose}>TBD</MenuItem>
             <MenuItem onClick={handleClose}>TBD</MenuItem>
           </Menu>
