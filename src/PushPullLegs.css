@@ -20,7 +20,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
-.noWorkoutMessage {
+.noActiveWorkoutDisplay {
   width: 100%;
   height: 666px;
   display: flex;

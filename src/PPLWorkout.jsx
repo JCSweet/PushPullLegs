@@ -6,7 +6,7 @@ export default function PPLWorkout({exercises, updateSet, toggleWeightMode, incr
     <>
       {/* <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}> */}
       <List sx={{ width: "100%", maxWidth: 360, bgcolor: "#333333" }}>
-        {exercises.length === 0 ? <div className="noWorkoutMessage"><h2>Click "Quick PPL" <br />to begin!</h2></div> : null}
+        {exercises.length === 0 ? <div className="noActiveWorkoutDisplay"><h2>Click "Quick PPL" <br />to begin!</h2></div> : null}
         {exercises.map((exercise) => (
           <PPLWorkoutItem
             exercise={exercise}
